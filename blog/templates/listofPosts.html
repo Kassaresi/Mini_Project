@@ -1,0 +1,34 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+
+   List of all Items
+{% endblock %}
+
+
+{% block content %}
+  <head><link rel="stylesheet" type="text/css" href="{% static 'blog/listPosts.css' %}"></head>
+  <h1>List of Posts</h1>
+  
+  <ul>
+    <p><a href="/users/">HOME</a></p>
+
+    {% for x in myposts %}
+    <li>
+      <a href="details/{{ x.id }}">
+        <span>{{ x.title }}</span> 
+        <span>{{ x.created_at|date:"F j, Y, g:i a" }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h2>Create a New Post</h2>
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}  
+    <input type="submit" value="Submit">
+  </form>
+
+{% endblock %}
